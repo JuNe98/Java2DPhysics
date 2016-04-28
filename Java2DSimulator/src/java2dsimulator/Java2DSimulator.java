@@ -27,7 +27,7 @@ public class Java2DSimulator extends Application {
             
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("Hello World!");
+                System.out.println("Hello Julian!");
             }
         });
         
@@ -36,7 +36,7 @@ public class Java2DSimulator extends Application {
         
         Scene scene = new Scene(root, 300, 250);
         
-        primaryStage.setTitle("Hello World!");
+        primaryStage.setTitle("2D Physics Project by NES!");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
