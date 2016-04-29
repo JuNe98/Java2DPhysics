@@ -10,6 +10,7 @@ import javafx.scene.layout.Pane;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import javafx.scene.layout.BorderPane;
 /**
  * 
  * @author stirmayr
@@ -18,7 +19,7 @@ public class PhysObj extends Body {
 	
 	static ArrayList<PhysObj> bodies = new ArrayList<PhysObj>();
 	
-	static Pane mainPane;
+	static BorderPane mainPane;
 	ImageView iv = null;
 	
 	public PhysObj() {	// for non visible physics objects
@@ -31,11 +32,11 @@ public class PhysObj extends Body {
 		this();		// do all the non visible stuff first
 		iv = new ImageView();
 		iv.setImage(i);
-		mainPane.getChildren().add(iv);
+		mainPane.setCenter(iv);
 	}
 	
 	// must be called once before adding any visual objects
-	public static void setMainPane(Pane mp) {
+	public static void setMainPane(BorderPane mp) {
 		mainPane = mp;
 	}
 	

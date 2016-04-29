@@ -11,7 +11,7 @@ package java2dsimulator;
  */
 public class Settings {
 
-    public static double SCENE_WIDTH = 1400;
+    public static double SCENE_WIDTH = 1920;
     public static double SCENE_HEIGHT = 1000;
 
 /**

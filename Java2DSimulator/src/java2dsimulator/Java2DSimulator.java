@@ -16,14 +16,16 @@ import org.dyn4j.geometry.*;
 
 import java.util.Random;
 import javafx.event.EventHandler;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
 /**
  * 
  * @author stirm
  */
 public class Java2DSimulator extends Application {
 
-    Pane mainPane = null;
+    BorderPane mainPane = null;
     World world = null;
     Scene scene = null;
 
@@ -40,7 +42,7 @@ public class Java2DSimulator extends Application {
 
         // the scale and translate mean 0,0 is in the centre of the screen
         // at the bottom with height increasing up the screen
-        mainPane = new Pane();
+        mainPane = new BorderPane();
         Scale s = new Scale(1, -1);
         Translate t = new Translate(Settings.SCENE_WIDTH / 2, -Settings.SCENE_HEIGHT);
         mainPane.getTransforms().addAll(s, t);
@@ -51,15 +53,20 @@ public class Java2DSimulator extends Application {
         PhysObj.setMainPane(mainPane);
 
         primaryStage.setScene(scene);
+        primaryStage.setFullScreen(true);
         primaryStage.show();
 
-        Image img = new Image("file:img/smallbox.png");
+        Image boxImg = new Image("file:img/smallbox.png");
+        Image floorImg = new Image("file:img/floor.png");
+        ImageView floorView = new ImageView(floorImg);
 
         world = new World();
 
         // create the floor
         Rectangle floorRect = new Rectangle(20.0, 1.0);
-        PhysObj floor = new PhysObj(); // invisible no image...
+        
+        PhysObj floor = new PhysObj(floorImg); // invisible no image...
+        
         floor.addFixture(new BodyFixture(floorRect));
         floor.setMass(MassType.INFINITE);
 
@@ -69,18 +76,18 @@ public class Java2DSimulator extends Application {
 
         Rectangle rectShape = new Rectangle(1.0, 1.0);
 
-        for (int i = 0; i < 10; i++) {
-            PhysObj rectangle = new PhysObj(img);
-            BodyFixture f = new BodyFixture(rectShape);
-            f.setDensity(1.2);
-            f.setFriction(0.8);
-            f.setRestitution(0.4);
-            rectangle.addFixture(f);
-            rectangle.setMass();
-            rectangle.translate(rnd(-3, 3), 9.0 + rnd(-4, 2));
-            rectangle.getTransform().setRotation(rnd(-3.141, 3.141));
-            this.world.addBody(rectangle);
-        }
+//        for (int i = 0; i < 10; i++) {
+//            PhysObj rectangle = new PhysObj(boxImg);
+//            BodyFixture f = new BodyFixture(rectShape);
+//            f.setDensity(1.2);
+//            f.setFriction(0.8);
+//            f.setRestitution(0.4);
+//            rectangle.addFixture(f);
+//            rectangle.setMass();
+//            rectangle.translate(rnd(-3, 3), 9.0 + rnd(-4, 2));
+//            rectangle.getTransform().setRotation(rnd(-3.141, 3.141));
+//            this.world.addBody(rectangle);
+//        }
 
         scene.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
@@ -89,7 +96,7 @@ public class Java2DSimulator extends Application {
                 int y = (int) event.getSceneY();
                 
                 System.out.println();
-                PhysObj rectangle = new PhysObj(img);
+                PhysObj rectangle = new PhysObj(boxImg);
                 BodyFixture f = new BodyFixture(rectShape);
                 f.setDensity(1.2);
                 f.setFriction(0.8);
