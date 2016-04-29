@@ -7,7 +7,7 @@ package java2dsimulator;
 
 /**
  *
- * @author stirm
+ * @author stirmayr
  */
 public class Settings {
 
