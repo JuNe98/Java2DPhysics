@@ -10,7 +10,10 @@ import javafx.scene.layout.Pane;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-
+/**
+ * 
+ * @author stirmayr
+ */
 public class PhysObj extends Body {
 	
 	static ArrayList<PhysObj> bodies = new ArrayList<PhysObj>();
