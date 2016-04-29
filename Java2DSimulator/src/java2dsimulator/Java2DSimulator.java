@@ -1,5 +1,8 @@
 package java2dsimulator;
 
+import java.awt.MouseInfo;
+import java.awt.Point;
+import java.awt.PointerInfo;
 import javafx.application.Application;
 import javafx.scene.*;
 import javafx.stage.Stage;
@@ -82,6 +85,10 @@ public class Java2DSimulator extends Application {
         scene.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
+                int x = (int) event.getSceneX();
+                int y = (int) event.getSceneY();
+                
+                System.out.println();
                 PhysObj rectangle = new PhysObj(img);
                 BodyFixture f = new BodyFixture(rectShape);
                 f.setDensity(1.2);
@@ -89,7 +96,18 @@ public class Java2DSimulator extends Application {
                 f.setRestitution(0.4);
                 rectangle.addFixture(f);
                 rectangle.setMass();
-                rectangle.translate(rnd(-3, 3), 9.0 + rnd(-4, 2));
+                if(x>(Settings.SCENE_WIDTH/2)){
+                    double rx = (x-Settings.SCENE_WIDTH/2)/64 - 0.5;
+                    double ry = (Settings.SCENE_HEIGHT-y)/64 - 0.5;
+                    rectangle.translate(rx,ry);
+                    System.out.printf("Rectangle spawned! Mouse at X: %d Y: %d -> Position at X: %f Y: %f", x,y, rx, ry);
+                }else if(x<(Settings.SCENE_WIDTH/2)){
+                    double lx = -((Settings.SCENE_WIDTH/2 - x)/64) - 0.5;
+                    double ly = (Settings.SCENE_HEIGHT-y)/64 - 0.5;
+                    rectangle.translate(lx,ly);
+                    System.out.printf("Rectangle spawned! Mouse at X: %d Y: %d -> Position at X: %f Y: %f", x,y, lx, ly);
+                }
+
                 rectangle.getTransform().setRotation(0);
                 world.addBody(rectangle);
             }
