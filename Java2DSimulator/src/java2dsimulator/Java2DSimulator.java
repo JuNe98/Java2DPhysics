@@ -14,7 +14,10 @@ import org.dyn4j.geometry.*;
 import java.util.Random;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
-
+/**
+ * 
+ * @author stirm
+ */
 public class Java2DSimulator extends Application {
 
     Pane mainPane = null;
