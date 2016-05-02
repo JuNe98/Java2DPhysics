@@ -19,7 +19,7 @@ public class PhysObj extends Body {
 	
 	static ArrayList<PhysObj> bodies = new ArrayList<PhysObj>();
 	
-	static BorderPane mainPane;
+	static Pane mainPane;
 	ImageView iv = null;
 	
 	public PhysObj() {	// for non visible physics objects
@@ -32,11 +32,11 @@ public class PhysObj extends Body {
 		this();		// do all the non visible stuff first
 		iv = new ImageView();
 		iv.setImage(i);
-		mainPane.setCenter(iv);
+		mainPane.getChildren().add(iv);
 	}
 	
 	// must be called once before adding any visual objects
-	public static void setMainPane(BorderPane mp) {
+	public static void setMainPane(Pane mp) {
 		mainPane = mp;
 	}
 	
