@@ -5,7 +5,7 @@ import org.dyn4j.geometry.Circle;
 
 /**
  *
- * @author Julian
+ * @author Julian Nenning
  */
 public class MyTriangle implements Object2D{
     private int length;
