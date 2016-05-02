@@ -23,7 +23,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 /**
  * 
- * @author Matthias Stirmayr, Julian Nening
+ * @author Matthias Stirmayr, Julian Nening, Selina Enzlmüller
  */
 public class Java2DSimulator extends Application {
     

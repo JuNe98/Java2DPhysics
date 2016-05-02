@@ -13,7 +13,7 @@ import java.util.Iterator;
 import javafx.geometry.Rectangle2D;
 /**
  * 
- * @author Stirmayr Matthias, Julian Nenning
+ * @author Stirmayr Matthias, Julian Nenning, Selina Enzlmüller
  */
 public class PhysObj extends Body {
 	
