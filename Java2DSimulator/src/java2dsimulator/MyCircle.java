@@ -4,6 +4,6 @@ package java2dsimulator;
  *
  * @author Julian
  */
-public class Circle {
+public class MyCircle {
     private int radius;
 }
