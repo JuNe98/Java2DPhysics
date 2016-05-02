@@ -10,16 +10,16 @@ import javafx.scene.layout.Pane;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import javafx.scene.layout.BorderPane;
+import javafx.geometry.Rectangle2D;
 /**
  * 
- * @author stirmayr
+ * @author Stirmayr Matthias, Julian Nenning
  */
 public class PhysObj extends Body {
 	
 	static ArrayList<PhysObj> bodies = new ArrayList<PhysObj>();
 	
-	static BorderPane mainPane;
+	static Pane mainPane;
 	ImageView iv = null;
 	
 	public PhysObj() {	// for non visible physics objects
@@ -31,12 +31,13 @@ public class PhysObj extends Body {
 	public PhysObj(Image i) {
 		this();		// do all the non visible stuff first
 		iv = new ImageView();
+                Rectangle2D viewPort = new Rectangle2D(0,0, i.getWidth(), i.getHeight());
 		iv.setImage(i);
-		mainPane.setCenter(iv);
+		mainPane.getChildren().add(iv);
         }
 	
 	// must be called once before adding any visual objects
-	public static void setMainPane(BorderPane mp) {
+	public static void setMainPane(Pane mp) {
 		mainPane = mp;
 	}
 	

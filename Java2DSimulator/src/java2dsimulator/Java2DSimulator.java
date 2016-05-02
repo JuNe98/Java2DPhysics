@@ -16,16 +16,20 @@ import org.dyn4j.geometry.*;
 
 import java.util.Random;
 import javafx.event.EventHandler;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 /**
  * 
  * @author Matthias Stirmayr, Julian Nening
  */
 public class Java2DSimulator extends Application {
-
-    BorderPane mainPane = null;
+    
+    BorderPane overlay = null;
+    Pane mainPane = null;
+    
     World world = null;
     Scene scene = null;
 
@@ -38,40 +42,47 @@ public class Java2DSimulator extends Application {
     @Override
     public void start(Stage primaryStage) {
 
-        Group root = new Group();
-
         // the scale and translate mean 0,0 is in the centre of the screen
         // at the bottom with height increasing up the screen
-        mainPane = new BorderPane();
+        
+        overlay = new BorderPane();
+        mainPane = new Pane();
+        
         Scale s = new Scale(1, -1);
         Translate t = new Translate(Settings.SCENE_WIDTH / 2, -Settings.SCENE_HEIGHT);
         mainPane.getTransforms().addAll(s, t);
-
-        root.getChildren().add(mainPane);
-
-        scene = new Scene(root, Settings.SCENE_WIDTH, Settings.SCENE_HEIGHT);
+        //TOOLBOX
+        Label header = new Label("Tools");
+        
+        VBox toolline = new VBox(header);
+        
+        BorderPane tools = new BorderPane();
+        tools.setCenter(toolline);
+        tools.setLayoutX(2);
+        overlay.setCenter(mainPane);
+        overlay.setRight(tools);
+        scene = new Scene(overlay, Settings.SCENE_WIDTH, Settings.SCENE_HEIGHT);
         PhysObj.setMainPane(mainPane);
 
         primaryStage.setScene(scene);
-        primaryStage.setFullScreen(true);
         primaryStage.show();
-
         
-        Image floorImg = new Image("file:img/floor.png");
         //ImageView floorView = new ImageView(floorImg);
-
         world = new World();
 
         // create the floor
-        Rectangle floorRect = new Rectangle(20.0, 1.0);
+        Rectangle floorRect = new Rectangle(120.0, 1.0);
         
-        PhysObj floor = new PhysObj(floorImg); // invisible no image...
+        PhysObj floor = new PhysObj(new Image("file:img/ground.png"));
+        floor.rotate(Math.PI);
         
         floor.addFixture(new BodyFixture(floorRect));
+        
         floor.setMass(MassType.INFINITE);
 
         // move the floor down a bit
-        floor.translate(-10.0, -1.0);
+        floor.translate(0.0, -1.0);
+        
         this.world.addBody(floor);
 
         Rectangle rectShape = new Rectangle(1.0, 1.0);
@@ -92,7 +103,14 @@ public class Java2DSimulator extends Application {
         scene.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                Image boxImg = new Image("file:img/smallbox.png");
+                Image boxImg;
+                if (rnd(0, 10) > 5) {
+
+                    boxImg = new Image("file:img/smallbox.png");
+                } else {
+
+                    boxImg = new Image("file:img/smile.png");
+                }
                 int x = (int) event.getSceneX();
                 int y = (int) event.getSceneY();
                 
