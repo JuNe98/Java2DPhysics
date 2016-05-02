@@ -1,8 +1,5 @@
 package java2dsimulator;
 
-import java.awt.MouseInfo;
-import java.awt.Point;
-import java.awt.PointerInfo;
 import javafx.application.Application;
 import javafx.scene.*;
 import javafx.stage.Stage;
@@ -17,7 +14,6 @@ import org.dyn4j.geometry.*;
 import java.util.Random;
 import javafx.event.EventHandler;
 import javafx.scene.control.*;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
