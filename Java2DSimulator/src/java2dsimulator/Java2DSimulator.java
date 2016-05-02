@@ -25,7 +25,7 @@ import javafx.scene.layout.BorderPane;
  */
 public class Java2DSimulator extends Application {
 
-    BorderPane mainPane = null;
+    Pane mainPane = null;
     World world = null;
     Scene scene = null;
 
@@ -56,9 +56,9 @@ public class Java2DSimulator extends Application {
         primaryStage.setFullScreen(true);
         primaryStage.show();
 
-        Image boxImg = new Image("file:img/smallbox.png");
+        
         Image floorImg = new Image("file:img/floor.png");
-        ImageView floorView = new ImageView(floorImg);
+        //ImageView floorView = new ImageView(floorImg);
 
         world = new World();
 
@@ -71,7 +71,7 @@ public class Java2DSimulator extends Application {
         floor.setMass(MassType.INFINITE);
 
         // move the floor down a bit
-        floor.translate(0.0, -1.0);
+        floor.translate(-10.0, -1.0);
         this.world.addBody(floor);
 
         Rectangle rectShape = new Rectangle(1.0, 1.0);
@@ -92,6 +92,7 @@ public class Java2DSimulator extends Application {
         scene.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
+                Image boxImg = new Image("file:img/smallbox.png");
                 int x = (int) event.getSceneX();
                 int y = (int) event.getSceneY();
                 
