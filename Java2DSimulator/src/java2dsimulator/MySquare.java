@@ -7,23 +7,23 @@ import org.dyn4j.geometry.Circle;
  *
  * @author Julian
  */
-public class MyCircle implements Object2D{
-    private int radius;
+public class MySquare implements Object2D{
+    private int length;
     private ArrayList<Circle> circles;
 
-    public int getRadius() {
-        return radius;
+    public int getLength() {
+        return this.length;
     }
 
-    public void setRadius(int radius) {
-        this.radius = radius;
+    public void setLength(int length) {
+        this.length = length;
     }
 
     @Override
     public ArrayList<Circle> getCircles() {
         circles = new ArrayList<Circle>();
+        int x = this.length*this.length;
         // generate circle coordinates and add them to circles...
         return circles;
     }
-    
 }

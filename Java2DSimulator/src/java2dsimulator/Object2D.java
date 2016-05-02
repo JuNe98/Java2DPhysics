@@ -5,10 +5,13 @@
  */
 package java2dsimulator;
 
+import java.util.ArrayList;
+import org.dyn4j.geometry.Circle;
+
 /**
  *
  * @author Julian
  */
 public interface Object2D {
-    public int getCircles();
+    public ArrayList<Circle> getCircles();
 }
