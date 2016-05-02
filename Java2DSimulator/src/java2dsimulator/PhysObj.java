@@ -36,8 +36,8 @@ public class PhysObj extends Body {
         }
 	
 	// must be called once before adding any visual objects
-	public static void setMainPane(Pane mp) {
-		mainPane.setCenter(mp);
+	public static void setMainPane(BorderPane mp) {
+		mainPane = mp;
 	}
 	
 	// updates all visual items depending on they dynamic component (body)
