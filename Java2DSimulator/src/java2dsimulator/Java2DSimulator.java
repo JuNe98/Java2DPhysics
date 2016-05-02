@@ -42,7 +42,7 @@ public class Java2DSimulator extends Application {
 
         // the scale and translate mean 0,0 is in the centre of the screen
         // at the bottom with height increasing up the screen
-        mainPane = new BorderPane();
+        mainPane = new Pane();
         Scale s = new Scale(1, -1);
         Translate t = new Translate(Settings.SCENE_WIDTH / 2, -Settings.SCENE_HEIGHT);
         mainPane.getTransforms().addAll(s, t);
