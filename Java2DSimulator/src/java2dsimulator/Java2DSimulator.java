@@ -21,7 +21,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 /**
  * 
- * @author stirm
+ * @author Matthias Stirmayr, Julian Nening
  */
 public class Java2DSimulator extends Application {
 
