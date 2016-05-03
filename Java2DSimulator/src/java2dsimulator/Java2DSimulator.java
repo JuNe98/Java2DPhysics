@@ -43,6 +43,7 @@ public class Java2DSimulator extends Application {
         
         overlay = new BorderPane();
         mainPane = new Pane();
+        Object2D oj;
         
         Scale s = new Scale(1, -1);
         Translate t = new Translate(Settings.SCENE_WIDTH / 2, -Settings.SCENE_HEIGHT);
