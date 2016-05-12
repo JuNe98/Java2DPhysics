@@ -60,7 +60,7 @@ public class Java2DSimulator extends Application {
         overlay.setRight(tools);
         scene = new Scene(overlay, Settings.SCENE_WIDTH, Settings.SCENE_HEIGHT);
         PhysObj.setMainPane(mainPane);
-
+        
         primaryStage.setScene(scene);
         primaryStage.show();
         
