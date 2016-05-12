@@ -9,7 +9,7 @@ import java.awt.Point;
 public class Particle{
     private Point point = new Point();
 
-    public Particle(int x, int y) {
+    public Particle(double x, double y) {
         point.setLocation(x, y);
     }
     
