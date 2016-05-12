@@ -9,7 +9,7 @@ import org.dyn4j.geometry.Circle;
  */
 public class MyCircle implements Object2D{
     private int radius;
-    private ArrayList<Circle> circles;
+    private ArrayList<Circle> circles;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
 
     public int getRadius() {
         return radius;
