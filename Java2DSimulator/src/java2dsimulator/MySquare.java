@@ -57,7 +57,13 @@ public class MySquare implements Object2D{
                         x = ((int)mouseposition.getX())+(length/2)*8+(length/2-1)*1;
                     }
                 } else{
-                    
+                    if(i<length/2){
+                        y = ((int)mouseposition.getY())-4-((length-1)/2)*8-((length-1)/2)*1;
+                    }else if(i>length/2){
+                        y = ((int)mouseposition.getY())+4+((length-1)/2)*8+((length-1)/2)*1;
+                    }else{
+                        y = (int)mouseposition.getY();
+                    }
                 }
                 Particle particle = new Particle(x,y);
                 particles.add(particle);
