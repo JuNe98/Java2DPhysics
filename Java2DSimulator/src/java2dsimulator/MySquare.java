@@ -47,25 +47,32 @@ public class MySquare implements Object2D{
                 int y = 0;
                 if(length%2==0){
                     if(i<length/2){
-                        y = ((int)mouseposition.getY())-(length/2)*8-(length/2-1)*1;
+                        y = ((int)mouseposition.getY())-(length/2)*8-(length/2-1)*1-4;
                     }else if(i>length/2){
-                        y = ((int)mouseposition.getY())+(length/2)*8+(length/2-1)*1;
+                        y = ((int)mouseposition.getY())+(length/2)*8+(length/2-1)*1-4;
                     }
                     if(j<length/2){
-                        x = ((int)mouseposition.getX())-(length/2)*8-(length/2-1)*1;
+                        x = ((int)mouseposition.getX())-(length/2)*8-(length/2-1)*1-4;
                     }else if(j>length/2){
-                        x = ((int)mouseposition.getX())+(length/2)*8+(length/2-1)*1;
+                        x = ((int)mouseposition.getX())+(length/2)*8+(length/2-1)*1-4;
                     }
                 } else{
                     if(i<length/2){
-                        y = ((int)mouseposition.getY())-4-((length-1)/2)*8-((length-1)/2)*1;
+                        y = ((int)mouseposition.getY())-4-((length-1)/2)*8-((length-1)/2)*1-4;
                     }else if(i>length/2){
-                        y = ((int)mouseposition.getY())+4+((length-1)/2)*8+((length-1)/2)*1;
+                        y = ((int)mouseposition.getY())+4+((length-1)/2)*8+((length-1)/2)*1-4;
                     }else{
-                        y = (int)mouseposition.getY();
+                        y = (int)mouseposition.getY()-4;
                     }
                 }
-                Particle particle = new Particle(x,y);
+                double dy = y/64;
+                double dx = 0;
+                if(x<Settings.SCENE_WIDTH/2){
+                    dx = -(x/64);
+                }else if(x>Settings.SCENE_WIDTH/2){
+                    dx = +(x/64);
+                }
+                Particle particle = new Particle(dx,dy);
                 particles.add(particle);
             }
         }
