@@ -9,7 +9,7 @@ import org.dyn4j.geometry.Circle;
  */
 public class MyTriangle implements Object2D{
     private int length;
-    private ArrayList<Circle> circles;
+    private ArrayList<Particle> circles;
     
     public int getLength() {
         return length;
@@ -20,8 +20,8 @@ public class MyTriangle implements Object2D{
     }
 
     @Override
-    public ArrayList<Circle> getCircles() {
-        circles = new ArrayList<Circle>();
+    public ArrayList<Particle> getCircles() {
+        circles = new ArrayList<Particle>();
         // How many circles do we need = x
         int x = 0;
         for (int i = length; i > 0; i--) {

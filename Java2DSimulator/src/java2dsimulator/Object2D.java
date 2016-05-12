@@ -8,5 +8,5 @@ import org.dyn4j.geometry.Circle;
  * @author Julian Nenning
  */
 public interface Object2D {
-    public ArrayList<Circle> getCircles();
+    public ArrayList<Particle> getCircles();
 }
