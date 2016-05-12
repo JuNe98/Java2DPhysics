@@ -68,9 +68,9 @@ public class MySquare implements Object2D{
                 double dy = y/64;
                 double dx = 0;
                 if(x<Settings.SCENE_WIDTH/2){
-                    dx = -(x/64);
+                    //dx = ;
                 }else if(x>Settings.SCENE_WIDTH/2){
-                    dx = +(x/64);
+                    dx = (x/64)-(Settings.SCENE_WIDTH/2)/64;
                 }
                 Particle particle = new Particle(dx,dy);
                 particles.add(particle);
