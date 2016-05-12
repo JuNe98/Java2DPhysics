@@ -9,7 +9,7 @@ import org.dyn4j.geometry.Circle;
  */
 public class MyCircle implements Object2D{
     private int radius;
-    private ArrayList<Circle> circles;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+    private ArrayList<Particle> circles;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
 
     public int getRadius() {
         return radius;
@@ -20,11 +20,10 @@ public class MyCircle implements Object2D{
     }
 
     @Override
-    public ArrayList<Circle> getCircles() {
-        circles = new ArrayList<Circle>();
-        // How many circles do we need = x
-        // generate circle coordinates and add them to circles...
-        return circles;
+    public ArrayList<Particle> getCircles() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+
     
 }
