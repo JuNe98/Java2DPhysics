@@ -1,15 +1,23 @@
 package java2dsimulator;
 
 import java.util.ArrayList;
-import org.dyn4j.geometry.Circle;
 
 /**
  *
- * @author Julian Nenning
+ * @author Stirmayr Matthias
  */
-public class MyCircle implements Object2D{
+public class MyCircle implements Object2D {
+
     private int radius;
-    private ArrayList<Particle> circles;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+    private ArrayList<Particle> circles;
+    private int MouseX;
+    private int MouseY;
+
+    public MyCircle(int radius, int MouseX, int MouseY) {
+        this.radius = radius;
+        this.MouseX = MouseX;
+        this.MouseY = MouseY;
+    }
 
     public int getRadius() {
         return radius;
@@ -21,9 +29,50 @@ public class MyCircle implements Object2D{
 
     @Override
     public ArrayList<Particle> getCircles() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        genCircli();
+        return circles;
     }
 
+    private void genCircli() {
+        int d = (5 - r * 4) / 4;
+        int x = 0;
+        int y = radius;
 
+        do {
+            circles.add(new Particle(
+            translateWidth((MouseX + x)), y));
+            image.setPixel(centerX + x, centerY + y, circleColor);
+            image.setPixel(centerX + x, centerY - y, circleColor);
+            image.setPixel(centerX - x, centerY + y, circleColor);
+            image.setPixel(centerX - x, centerY - y, circleColor);
+            image.setPixel(centerX + y, centerY + x, circleColor);
+            image.setPixel(centerX + y, centerY - x, circleColor);
+            image.setPixel(centerX - y, centerY + x, circleColor);
+            image.setPixel(centerX - y, centerY - x, circleColor);
+            if (d < 0) {
+                d += 2 * x + 1;
+            } else {
+                d += 2 * (x - y) + 1;
+                y--;
+            }
+            x++;
+        } while (x <= y);
+    }
+
+    public double translateWidth(int x) {
+        double rx = 0;
+        if (x > (Settings.SCENE_WIDTH / 2)) {
+            rx = (x - Settings.SCENE_WIDTH / 2) / 64 - 0.5;
+        } else if (x < (Settings.SCENE_WIDTH / 2)) {
+            rx = -((Settings.SCENE_WIDTH / 2 - x) / 64) - 0.5;
+           
+        }
+        return rx;
+    }
     
+    public double translateHeight(int y){
+        double ly = (Settings.SCENE_HEIGHT - y) / 64 - 0.5;
+        return ly;
+    }
+
 }
