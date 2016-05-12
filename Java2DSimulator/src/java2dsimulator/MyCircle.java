@@ -34,21 +34,27 @@ public class MyCircle implements Object2D {
     }
 
     private void genCircli() {
-        int d = (5 - r * 4) / 4;
+        int d = (5 - radius * 4) / 4;
         int x = 0;
         int y = radius;
 
         do {
-            circles.add(new Particle(
-            translateWidth((MouseX + x)), y));
-            image.setPixel(centerX + x, centerY + y, circleColor);
+            circles.add(new Particle(translateWidth((MouseX + (9*x))), translateWidth(MouseY + (9*y))));
+            circles.add(new Particle(translateWidth((MouseX + (9*x))), translateWidth(MouseY - (9*y))));
+            circles.add(new Particle(translateWidth((MouseX - (9*x))), translateWidth(MouseY + (9*y))));
+            circles.add(new Particle(translateWidth((MouseX - (9*x))), translateWidth(MouseY - (9*y))));
+            circles.add(new Particle(translateWidth((MouseX + (9*y))), translateWidth(MouseY + (9*x))));
+            circles.add(new Particle(translateWidth((MouseX + (9*y))), translateWidth(MouseY - (9*x))));
+            circles.add(new Particle(translateWidth((MouseX - (9*y))), translateWidth(MouseY + (9*x))));
+            circles.add(new Particle(translateWidth((MouseX - (9*y))), translateWidth(MouseY - (9*x))));
+            /**image.setPixel(centerX + x, centerY + y, circleColor);
             image.setPixel(centerX + x, centerY - y, circleColor);
             image.setPixel(centerX - x, centerY + y, circleColor);
             image.setPixel(centerX - x, centerY - y, circleColor);
             image.setPixel(centerX + y, centerY + x, circleColor);
             image.setPixel(centerX + y, centerY - x, circleColor);
             image.setPixel(centerX - y, centerY + x, circleColor);
-            image.setPixel(centerX - y, centerY - x, circleColor);
+            image.setPixel(centerX - y, centerY - x, circleColor);**/
             if (d < 0) {
                 d += 2 * x + 1;
             } else {
@@ -62,16 +68,16 @@ public class MyCircle implements Object2D {
     public double translateWidth(int x) {
         double rx = 0;
         if (x > (Settings.SCENE_WIDTH / 2)) {
-            rx = (x - Settings.SCENE_WIDTH / 2) / 64 - 0.5;
+            rx = (x - Settings.SCENE_WIDTH / 2) / 64 - 0.0625;
         } else if (x < (Settings.SCENE_WIDTH / 2)) {
-            rx = -((Settings.SCENE_WIDTH / 2 - x) / 64) - 0.5;
+            rx = -((Settings.SCENE_WIDTH / 2 - x) / 64) - 0.0625;
            
         }
         return rx;
     }
     
     public double translateHeight(int y){
-        double ly = (Settings.SCENE_HEIGHT - y) / 64 - 0.5;
+        double ly = (Settings.SCENE_HEIGHT - y) / 64 - 0.0625;
         return ly;
     }
 
