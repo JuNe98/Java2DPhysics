@@ -1,21 +1,23 @@
 package java2dsimulator;
 
-import java.awt.Point;
 
 /**
  *
- * @author Julian Nenning
+ * @author Julian Nenning, Matthias Stirmayr
  */
 public class Particle{
-    private Point point = new Point();
-
+    private double x;
+    private double y;
+    
     public Particle(double x, double y) {
-        point.setLocation(x, y);
+        this.x = x;
+        this.y = y;
+        
     }
     public double getX(){
-        return point.getLocation().getX();
+        return this.x;
     }
     public double getY(){
-        return point.getLocation().getY();
+        return this.y;
     }
 }
