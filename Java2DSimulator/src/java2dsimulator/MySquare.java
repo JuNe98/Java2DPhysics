@@ -37,7 +37,7 @@ public class MySquare implements Object2D{
     @Override
     public ArrayList<Particle> getCircles() {
         particles = new ArrayList<Particle>();
-        // How many circles do we need = x
+        // How many circles do we need = count
         int count = this.length * this.length;
         
         // generate circle coordinates and add them to circles...
