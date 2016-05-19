@@ -12,4 +12,10 @@ public class Particle{
     public Particle(double x, double y) {
         point.setLocation(x, y);
     }
+    public double getX(){
+        return point.getLocation().getX();
+    }
+    public double getY(){
+        return point.getLocation().getY();
+    }
 }
