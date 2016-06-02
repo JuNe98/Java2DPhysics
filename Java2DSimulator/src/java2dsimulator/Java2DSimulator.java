@@ -153,6 +153,22 @@ public class Java2DSimulator extends Application {
                 
                 }else if(toolbar.type == 1){
                     
+                }else if(toolbar.type == 3){
+                    int x = (int) event.getSceneX();
+                    int y = (int) event.getSceneY();
+                    MySquare square = new MySquare(toolbar.size, x,y);
+                    ArrayList<Particle> particles = square.getCircles();
+                    for (int i = 0; i < particles.size(); i++) {
+                        PhysObj par = new PhysObj(new Image("file:img/particle.png"));
+                        BodyFixture f = new BodyFixture(new Circle(0.0625));
+                        f.setDensity(1.2);
+                        f.setFriction(0.8);
+                        f.setRestitution(0.4);
+                        par.addFixture(f);
+                        par.setMass(MassType.NORMAL);
+                        par.translate(particles.get(i).getX(), particles.get(i).getY());
+                        world.addBody(par);
+                    }
                 }
             }
         });
