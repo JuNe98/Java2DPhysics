@@ -13,20 +13,24 @@ import org.dyn4j.dynamics.*;
 import org.dyn4j.geometry.*;
 
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.EventHandler;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+
 /**
- * 
+ *
  * @author Matthias Stirmayr, Julian Nening, Selina Enzlmüller
  */
 public class Java2DSimulator extends Application {
-    
+
+    Toolbar toolbar;
     BorderPane overlay = null;
     Pane mainPane = null;
-    
+
     World world = null;
     Scene scene = null;
 
@@ -41,50 +45,117 @@ public class Java2DSimulator extends Application {
 
         // the scale and translate mean 0,0 is in the centre of the screen
         // at the bottom with height increasing up the screen
-        
         overlay = new BorderPane();
         mainPane = new Pane();
         Object2D oj;
-        
+
         Scale s = new Scale(1, -1);
         Translate t = new Translate(Settings.SCENE_WIDTH / 2, -Settings.SCENE_HEIGHT);
         mainPane.getTransforms().addAll(s, t);
         //TOOLBOX
         Label header = new Label("Tools");
-        
+
         VBox toolline = new VBox(header);
-        
-        BorderPane tools = new BorderPane();
-        tools.setCenter(toolline);
-        tools.setLayoutX(2);
+
+        toolbar = new Toolbar();
+        try {
+            toolbar.start(primaryStage);
+        } catch (Exception ex) {
+            Logger.getLogger(Java2DSimulator.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        VBox tools = new VBox();
+
+        tools.getChildren().add(toolbar.tools);
+//        tools.setLayoutX(2);
         overlay.setCenter(mainPane);
         overlay.setRight(tools);
         scene = new Scene(overlay, Settings.SCENE_WIDTH, Settings.SCENE_HEIGHT);
         PhysObj.setMainPane(mainPane);
-        
+
         primaryStage.setMaximized(true);
         primaryStage.setScene(scene);
         primaryStage.show();
-        
+
         //ImageView floorView = new ImageView(floorImg);
         world = new World();
 
         // create the floor
         Rectangle floorRect = new Rectangle(120.0, 1.0);
-        
-        PhysObj floor = new PhysObj(new Image("file:img/ground.png"));
+
+        PhysObj floor = new PhysObj(new Image("file:img/floor.png"));
         floor.rotate(Math.PI);
-        
+
         floor.addFixture(new BodyFixture(floorRect));
-        
+
         floor.setMass(MassType.INFINITE);
 
         // move the floor down a bit
         floor.translate(0.0, -1.0);
-        
+
         this.world.addBody(floor);
 
         Rectangle rectShape = new Rectangle(1.0, 1.0);
+        //SPAWN TEST
+        scene.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if (toolbar.type == 2) {
+                    MyCircle test = new MyCircle(toolbar.size, event.getSceneX(), event.getSceneY());
+                    ArrayList<Particle> x = test.getCircles();
+                    for (int i = 0; i < x.size(); i++) {
+                        PhysObj par = new PhysObj(new Image("file:img/particle.png"));
+                        BodyFixture f = new BodyFixture(new Circle(0.0625));
+                        f.setDensity(1.2);
+                        f.setFriction(0.8);
+                        f.setRestitution(0.4);
+                        par.addFixture(f);
+                        par.setMass(MassType.NORMAL);
+                        par.translate(x.get(i).getX(), x.get(i).getY());
+                        world.addBody(par);
+                    }
+                } else if (toolbar.type == 0) {
+
+                    Image boxImg;
+                    if (rnd(0, 10) > 5) {
+                        boxImg = new Image("file:img/smallbox.png");
+                    } else {
+
+                        boxImg = new Image("file:img/smile.png");
+                    }
+                    int x = (int) event.getSceneX();
+                    int y = (int) event.getSceneY();
+
+                    System.out.println();
+                    PhysObj rectangle = new PhysObj(boxImg);
+                    BodyFixture f = new BodyFixture(rectShape);
+                    f.setDensity(1.2);
+                    f.setFriction(0.8);
+                    f.setRestitution(0.4);
+                    rectangle.addFixture(f);
+                    rectangle.setMass();
+                    if (x > (Settings.SCENE_WIDTH / 2)) {
+                        double rx
+                                = (x - Settings.SCENE_WIDTH / 2) / 64 - 0.5;
+                        double ry
+                                = (Settings.SCENE_HEIGHT - y) / 64 - 0.5;
+                        rectangle.translate(rx, ry);
+                        System.out.printf("Rectangle spawned! Mouse at X: %d Y: %d - Position at X: % f Y:% f", x, y, rx, ry);
+                    } else if (x < (Settings.SCENE_WIDTH / 2)) {
+                        double lx = -((Settings.SCENE_WIDTH / 2 - x) / 64) - 0.5;
+                        double ly = (Settings.SCENE_HEIGHT - y) / 64 - 0.5;
+                        rectangle.translate(lx, ly);
+                        System.out.printf(
+                                "Rectangle spawned! Mouse at X: %d Y: %d ->Position at X: % f Y: % f", x, y, lx, ly);
+                    }
+                    rectangle.getTransform().setRotation(0);
+                    world.addBody(rectangle);
+                
+                
+                }else if(toolbar.type == 1){
+                    
+                }
+            }
+        });
 
 //        for (int i = 0; i < 10; i++) {
 //            PhysObj rectangle = new PhysObj(boxImg);
@@ -98,67 +169,34 @@ public class Java2DSimulator extends Application {
 //            rectangle.getTransform().setRotation(rnd(-3.141, 3.141));
 //            this.world.addBody(rectangle);
 //        }
-
-        scene.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                Image boxImg;
-                if (rnd(0, 10) > 5) {
-
-                    boxImg = new Image("file:img/smallbox.png");
-                } else {
-
-                    boxImg = new Image("file:img/smile.png");
-                }
-                int x = (int) event.getSceneX();
-                int y = (int) event.getSceneY();
-                
-                System.out.println();
-                PhysObj rectangle = new PhysObj(boxImg);
-                BodyFixture f = new BodyFixture(rectShape);
-                f.setDensity(1.2);
-                f.setFriction(0.8);
-                f.setRestitution(0.4);
-                rectangle.addFixture(f);
-                rectangle.setMass();
-                if(x>(Settings.SCENE_WIDTH/2)){
-                    double rx = (x-Settings.SCENE_WIDTH/2)/64 - 0.5;
-                    double ry = (Settings.SCENE_HEIGHT-y)/64 - 0.5;
-                    rectangle.translate(rx,ry);
-                    System.out.printf("Rectangle spawned! Mouse at X: %d Y: %d -> Position at X: %f Y: %f", x,y, rx, ry);
-                }else if(x<(Settings.SCENE_WIDTH/2)){
-                    double lx = -((Settings.SCENE_WIDTH/2 - x)/64) - 0.5;
-                    double ly = (Settings.SCENE_HEIGHT-y)/64 - 0.5;
-                    rectangle.translate(lx,ly);
-                    System.out.printf("Rectangle spawned! Mouse at X: %d Y: %d -> Position at X: %f Y: %f", x,y, lx, ly);
-                }
-
-                rectangle.getTransform().setRotation(0);
-                world.addBody(rectangle);
-            }
-        });
-
+        /**
+         * scene.setOnMouseClicked(new EventHandler<MouseEvent>() {
+         *
+         * @Override public void handle(MouseEvent event) { 
+         *
+         *
+         */
         AnimationTimer gameLoop = new AnimationTimer() {
 
-            long last;
+        long last;
 
-            @Override
-            public void handle(long now) { // now is in nanoseconds 
-                float delta = 1f / (1000.0f / ((now - last) / 1000000));  // seems long winded but avoids precision issues
-                world.updatev(delta);
-                PhysObj.update();
+        @Override
+        public void handle(long now) {
+            float delta = 1f / (1000.0f / ((now - last) / 1000000));
+            world.updatev(delta);
+            PhysObj.update();
 
-                last = now;
-            }
+            last = now;
+        }
 
-        };
-        gameLoop.start();
+    };
 
-    }
+    gameLoop.start ();
 
-    public static void main(String[] args) {
+}
+
+public static void main(String[] args) {
         launch(args);
     }
 
-        
 }
