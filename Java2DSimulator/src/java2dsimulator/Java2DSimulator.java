@@ -95,6 +95,7 @@ public class Java2DSimulator extends Application {
         this.world.addBody(floor);
 
         Rectangle rectShape = new Rectangle(1.0, 1.0);
+        Circle circleShape = new Circle(0.5);
         //SPAWN TEST
         scene.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
@@ -116,12 +117,9 @@ public class Java2DSimulator extends Application {
                 } else if (toolbar.type == 0) {
 
                     Image boxImg;
-                    if (rnd(0, 10) > 5) {
-                        boxImg = new Image("file:img/smallbox.png");
-                    } else {
+                    
+                    boxImg = new Image("file:img/smallkiste.png");
 
-                        boxImg = new Image("file:img/smile.png");
-                    }
                     int x = (int) event.getSceneX();
                     int y = (int) event.getSceneY();
 
@@ -153,6 +151,38 @@ public class Java2DSimulator extends Application {
                 
                 }else if(toolbar.type == 1){
                     
+                    Image kugelImg;
+                    
+                    kugelImg = new Image("file:img/smallkugel.png");
+
+                    int x = (int) event.getSceneX();
+                    int y = (int) event.getSceneY();
+
+                    System.out.println();
+                    PhysObj circle = new PhysObj(kugelImg);
+                    BodyFixture f = new BodyFixture(circleShape);
+                    f.setDensity(1.2);
+                    f.setFriction(0.8);
+                    f.setRestitution(0.4);
+                    circle.addFixture(f);
+                    circle.setMass();
+                    if (x > (Settings.SCENE_WIDTH / 2)) {
+                        double rx
+                                = (x - Settings.SCENE_WIDTH / 2) / 64 - 0.5;
+                        double ry
+                                = (Settings.SCENE_HEIGHT - y) / 64 - 0.5;
+                        circle.translate(rx, ry);
+                        System.out.printf("Circle spawned! Mouse at X: %d Y: %d - Position at X: % f Y:% f", x, y, rx, ry);
+                    } else if (x < (Settings.SCENE_WIDTH / 2)) {
+                        double lx = -((Settings.SCENE_WIDTH / 2 - x) / 64) - 0.5;
+                        double ly = (Settings.SCENE_HEIGHT - y) / 64 - 0.5;
+                        circle.translate(lx, ly);
+                        System.out.printf(
+                                "Circle spawned! Mouse at X: %d Y: %d ->Position at X: % f Y: % f", x, y, lx, ly);
+                    }
+                    circle.getTransform().setRotation(0);
+                    world.addBody(circle);
+                    
                 }else if(toolbar.type == 3){
                     int x = (int) event.getSceneX();
                     int y = (int) event.getSceneY();
@@ -174,16 +204,16 @@ public class Java2DSimulator extends Application {
         });
 
 //        for (int i = 0; i < 10; i++) {
-//            PhysObj rectangle = new PhysObj(boxImg);
+//            PhysObj circle = new PhysObj(kugelImg);
 //            BodyFixture f = new BodyFixture(rectShape);
 //            f.setDensity(1.2);
 //            f.setFriction(0.8);
 //            f.setRestitution(0.4);
-//            rectangle.addFixture(f);
-//            rectangle.setMass();
-//            rectangle.translate(rnd(-3, 3), 9.0 + rnd(-4, 2));
-//            rectangle.getTransform().setRotation(rnd(-3.141, 3.141));
-//            this.world.addBody(rectangle);
+//            circle.addFixture(f);
+//            circle.setMass();
+//            circle.translate(rnd(-3, 3), 9.0 + rnd(-4, 2));
+//            circle.getTransform().setRotation(rnd(-3.141, 3.141));
+//            this.world.addBody(circle);
 //        }
         /**
          * scene.setOnMouseClicked(new EventHandler<MouseEvent>() {

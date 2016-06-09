@@ -44,7 +44,7 @@ public class Toolbar extends Application {
         Label sizeparameter = new Label("SizeParameter");
         TextField tf = new TextField();
         optionsList = new VBox(sizeparameter, tf);
-        comboBox.setValue("");
+        comboBox.setValue("Square");
         comboBox.setPrefWidth(150);
 
         //Admit Button

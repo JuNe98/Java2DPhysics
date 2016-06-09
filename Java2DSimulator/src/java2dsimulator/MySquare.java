@@ -48,19 +48,24 @@ public class MySquare implements Object2D{
                 if(length%2==0){
                     if(i+1<length/2){
                         //y = (int) (Settings.SCENE_HEIGHT-(((int)mouseposition.getY())-(length/2)*8-(length/2-1)*1-4));
-                        y = (int) mouseposition.getY()+(length/2)*8+(length/2-1)+4;
+                        y = (int) mouseposition.getY()+(length/2-i)*8+(length/2-i)+4;
                     }else if(i+1>length/2){
                         //y = (int) (Settings.SCENE_HEIGHT-(((int)mouseposition.getY())+(length/2)*8+(length/2-1)*1-4));
-                        y = (int) mouseposition.getY()-(length/2)*8-(length/2-1)+4;
+                        y = (int) mouseposition.getY()-((length/2-(i-length/2))-1)*8-(length/2-(i-length/2))+4;
+                        if(i+1 == length){
+                            y -= 1;
+                        }
                     }
                     if(j+1<length/2){
                         //x = ((int)mouseposition.getX())-(length/2)*8-(length/2-1)*1-4;
-                        x = (int) mouseposition.getX() - (length/2)*8 - (length/2-1)*1 - 4;
+                        x = (int) mouseposition.getX() - (length/2-j)*8 - (length/2-j) - 4;
+                        if(j == 0){
+                            x += 1;
+                        }
                     }else if(j+1>length/2){
                         //x = ((int)mouseposition.getX())+(length/2)*8+(length/2-1)*1-4;
-                        x = (int) mouseposition.getX() + (length/2)*8 + (length/2-1)*1 - 4;
+                        x = (int) mouseposition.getX() + ((length/2-(j-length/2))-1)*8 + (length/2-(j-length/2)) - 4;
                     }
-                    
                 } else{
                     if(i+1<length/2){
                         //y = (int) (Settings.SCENE_HEIGHT-(((int)mouseposition.getY())-(length/2)*8-(length/2-1)*1-4));
