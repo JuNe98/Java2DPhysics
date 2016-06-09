@@ -39,14 +39,14 @@ public class MyCircle implements Object2D {
         int y = radius;
 
         do {
-            circles.add(new Particle(translateWidth((MouseX + (9*x))), translateHeight(MouseY + (9*y))));
-            circles.add(new Particle(translateWidth((MouseX + (9*x))), translateHeight(MouseY - (9*y))));
-            circles.add(new Particle(translateWidth((MouseX - (9*x))), translateHeight(MouseY + (9*y))));
-            circles.add(new Particle(translateWidth((MouseX - (9*x))), translateHeight(MouseY - (9*y))));
-            circles.add(new Particle(translateWidth((MouseX + (9*y))), translateHeight(MouseY + (9*x))));
-            circles.add(new Particle(translateWidth((MouseX + (9*y))), translateHeight(MouseY - (9*x))));
-            circles.add(new Particle(translateWidth((MouseX - (9*y))), translateHeight(MouseY + (9*x))));
-            circles.add(new Particle(translateWidth((MouseX - (9*y))), translateHeight(MouseY - (9*x))));
+            circles.add(new Particle(translateWidth((MouseX + (17*x))), translateHeight(MouseY + (17*y))));
+            circles.add(new Particle(translateWidth((MouseX + (17*x))), translateHeight(MouseY - (17*y))));
+            circles.add(new Particle(translateWidth((MouseX - (17*x))), translateHeight(MouseY + (17*y))));
+            circles.add(new Particle(translateWidth((MouseX - (17*x))), translateHeight(MouseY - (17*y))));
+            circles.add(new Particle(translateWidth((MouseX + (17*y))), translateHeight(MouseY + (17*x))));
+            circles.add(new Particle(translateWidth((MouseX + (17*y))), translateHeight(MouseY - (17*x))));
+            circles.add(new Particle(translateWidth((MouseX - (17*y))), translateHeight(MouseY + (17*x))));
+            circles.add(new Particle(translateWidth((MouseX - (17*y))), translateHeight(MouseY - (17*x))));
             
             if (d < 0) {
                 d += 2 * x + 1;
