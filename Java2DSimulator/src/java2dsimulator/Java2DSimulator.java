@@ -72,10 +72,13 @@ public class Java2DSimulator extends Application {
 //        tools.setLayoutX(2);
         overlay.setCenter(mainPane);
         overlay.setRight(tools);
+        
         scene = new Scene(overlay, Settings.SCENE_WIDTH, Settings.SCENE_HEIGHT);
         PhysObj.setMainPane(mainPane);
 
         primaryStage.setScene(scene);
+        primaryStage.setTitle("Java2DSimulator");
+        primaryStage.getIcons().add(new Image("file:img/Kiste.png"));
         primaryStage.show();
 
         //ImageView floorView = new ImageView(floorImg);
@@ -133,7 +136,7 @@ public class Java2DSimulator extends Application {
                     f.setRestitution(0.4);
                     rectangle.addFixture(f);
                     rectangle.setMass();
-                    rectangle.rotate(Math.PI/4);
+                    rectangle.rotate(Math.PI);
                     if (x > (Settings.SCENE_WIDTH / 2)) {
                         double rx
                                 = (x - Settings.SCENE_WIDTH / 2) / 64 - 0.5;
