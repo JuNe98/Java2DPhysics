@@ -22,6 +22,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 
 /**
+ * The Main Class which handels all the generation and Spawning and also the
+ * Userinputs
  *
  * @author Matthias Stirmayr, Julian Nening, Selina Enzlmüller
  */
@@ -47,6 +49,7 @@ public class Java2DSimulator extends Application {
         // at the bottom with height increasing up the screen
         overlay = new BorderPane();
         mainPane = new Pane();
+        overlay.setStyle("-fx-background-color: #F2FF3F;");
         Object2D oj;
 
         Scale s = new Scale(1, -1);
@@ -72,7 +75,6 @@ public class Java2DSimulator extends Application {
         scene = new Scene(overlay, Settings.SCENE_WIDTH, Settings.SCENE_HEIGHT);
         PhysObj.setMainPane(mainPane);
 
-        primaryStage.setMaximized(true);
         primaryStage.setScene(scene);
         primaryStage.show();
 
@@ -80,19 +82,14 @@ public class Java2DSimulator extends Application {
         world = new World();
 
         // create the floor
-        Rectangle floorRect = new Rectangle(120.0, 1.0);
-
-        PhysObj floor = new PhysObj(new Image("file:img/floor.png"));
-        floor.rotate(Math.PI);
-
-        floor.addFixture(new BodyFixture(floorRect));
-
-        floor.setMass(MassType.INFINITE);
-
-        // move the floor down a bit
-        floor.translate(0.0, -1.0);
-
-        this.world.addBody(floor);
+        for (int i = -30; i < 30; i++) {
+            Rectangle floorrect = new Rectangle(1.0, 1.0);
+            PhysObj floorbox = new PhysObj(new Image("file:img/darkground.png"));
+            floorbox.addFixture(new BodyFixture(floorrect));
+            floorbox.setMass(MassType.INFINITE);
+            floorbox.translate(i, 0.0);
+            this.world.addBody(floorbox);
+        }
 
         Rectangle rectShape = new Rectangle(1.0, 1.0);
         Circle circleShape = new Circle(0.5);
@@ -116,10 +113,14 @@ public class Java2DSimulator extends Application {
                     }
                 } else if (toolbar.type == 0) {
 
-                    Image boxImg;
-                    
-                    boxImg = new Image("file:img/smallkiste.png");
+                    Image boxImg = null;
+                    if (random.nextBoolean()) {
+                        boxImg = new Image("file:img/smile.png");
+                        
 
+                    } else {
+                        boxImg = new Image("file:img/smallkiste.png");
+                    }
                     int x = (int) event.getSceneX();
                     int y = (int) event.getSceneY();
 
@@ -127,32 +128,30 @@ public class Java2DSimulator extends Application {
                     PhysObj rectangle = new PhysObj(boxImg);
                     BodyFixture f = new BodyFixture(rectShape);
                     f.setDensity(1.2);
+                    
                     f.setFriction(0.8);
                     f.setRestitution(0.4);
                     rectangle.addFixture(f);
                     rectangle.setMass();
+                    rectangle.rotate(Math.PI/4);
                     if (x > (Settings.SCENE_WIDTH / 2)) {
                         double rx
                                 = (x - Settings.SCENE_WIDTH / 2) / 64 - 0.5;
                         double ry
                                 = (Settings.SCENE_HEIGHT - y) / 64 - 0.5;
                         rectangle.translate(rx, ry);
-                        System.out.printf("Rectangle spawned! Mouse at X: %d Y: %d - Position at X: % f Y:% f", x, y, rx, ry);
                     } else if (x < (Settings.SCENE_WIDTH / 2)) {
                         double lx = -((Settings.SCENE_WIDTH / 2 - x) / 64) - 0.5;
                         double ly = (Settings.SCENE_HEIGHT - y) / 64 - 0.5;
                         rectangle.translate(lx, ly);
-                        System.out.printf(
-                                "Rectangle spawned! Mouse at X: %d Y: %d ->Position at X: % f Y: % f", x, y, lx, ly);
                     }
                     rectangle.getTransform().setRotation(0);
                     world.addBody(rectangle);
-                
-                
-                }else if(toolbar.type == 1){
-                    
+
+                } else if (toolbar.type == 1) {
+
                     Image kugelImg;
-                    
+
                     kugelImg = new Image("file:img/smallkugel.png");
 
                     int x = (int) event.getSceneX();
@@ -182,11 +181,11 @@ public class Java2DSimulator extends Application {
                     }
                     circle.getTransform().setRotation(0);
                     world.addBody(circle);
-                    
-                }else if(toolbar.type == 3){
+
+                } else if (toolbar.type == 3) {
                     int x = (int) event.getSceneX();
                     int y = (int) event.getSceneY();
-                    MySquare square = new MySquare(toolbar.size, x,y);
+                    MySquare square = new MySquare(toolbar.size, x, y);
                     ArrayList<Particle> particles = square.getCircles();
                     for (int i = 0; i < particles.size(); i++) {
                         PhysObj par = new PhysObj(new Image("file:img/particle.png"));
@@ -218,30 +217,30 @@ public class Java2DSimulator extends Application {
         /**
          * scene.setOnMouseClicked(new EventHandler<MouseEvent>() {
          *
-         * @Override public void handle(MouseEvent event) { 
+         * @Override public void handle(MouseEvent event) {
          *
          *
          */
         AnimationTimer gameLoop = new AnimationTimer() {
 
-        long last;
+            long last;
 
-        @Override
-        public void handle(long now) {
-            float delta = 1f / (1000.0f / ((now - last) / 1000000));
-            world.updatev(delta);
-            PhysObj.update();
+            @Override
+            public void handle(long now) {
+                float delta = 1f / (1000.0f / ((now - last) / 1000000));
+                world.updatev(delta);
+                PhysObj.update();
 
-            last = now;
-        }
+                last = now;
+            }
 
-    };
+        };
 
-    gameLoop.start ();
+        gameLoop.start();
 
-}
+    }
 
-public static void main(String[] args) {
+    public static void main(String[] args) {
         launch(args);
     }
 
