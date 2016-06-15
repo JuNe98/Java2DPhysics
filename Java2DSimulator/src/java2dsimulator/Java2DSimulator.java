@@ -202,25 +202,7 @@ public class Java2DSimulator extends Application {
             }
         });
 
-//        for (int i = 0; i < 10; i++) {
-//            PhysObj circle = new PhysObj(kugelImg);
-//            BodyFixture f = new BodyFixture(rectShape);
-//            f.setDensity(1.2);
-//            f.setFriction(0.8);
-//            f.setRestitution(0.4);
-//            circle.addFixture(f);
-//            circle.setMass();
-//            circle.translate(rnd(-3, 3), 9.0 + rnd(-4, 2));
-//            circle.getTransform().setRotation(rnd(-3.141, 3.141));
-//            this.world.addBody(circle);
-//        }
-        /**
-         * scene.setOnMouseClicked(new EventHandler<MouseEvent>() {
-         *
-         * @Override public void handle(MouseEvent event) {
-         *
-         *
-         */
+
         AnimationTimer gameLoop = new AnimationTimer() {
 
             long last;

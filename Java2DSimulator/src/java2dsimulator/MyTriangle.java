@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import org.dyn4j.geometry.Circle;
 
 /**
- *
+ * @deprecated 
  * @author Julian Nenning
  */
 public class MyTriangle implements Object2D{

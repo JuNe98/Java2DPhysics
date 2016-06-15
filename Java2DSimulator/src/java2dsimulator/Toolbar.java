@@ -63,8 +63,10 @@ public class Toolbar extends Application {
             } else if (a == "Particle Square") {
                 type = 3;
             }
+            if (tf.getText().length() != 0) {
 
-            size = Integer.parseInt(tf.getText());
+                size = Integer.parseInt(tf.getText());
+            }
         });
 
         BorderPane admit = new BorderPane();

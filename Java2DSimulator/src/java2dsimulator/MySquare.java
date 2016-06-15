@@ -2,7 +2,6 @@ package java2dsimulator;
 
 import java.awt.Point;
 import java.util.ArrayList;
-import org.dyn4j.geometry.Circle;
 
 /**
  *
