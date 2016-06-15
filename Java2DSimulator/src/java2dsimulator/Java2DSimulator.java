@@ -72,7 +72,7 @@ public class Java2DSimulator extends Application {
 //        tools.setLayoutX(2);
         overlay.setCenter(mainPane);
         overlay.setRight(tools);
-        
+
         scene = new Scene(overlay, Settings.SCENE_WIDTH, Settings.SCENE_HEIGHT);
         PhysObj.setMainPane(mainPane);
 
@@ -119,7 +119,6 @@ public class Java2DSimulator extends Application {
                     Image boxImg = null;
                     if (random.nextBoolean()) {
                         boxImg = new Image("file:img/smile.png");
-                        
 
                     } else {
                         boxImg = new Image("file:img/smallkiste.png");
@@ -131,7 +130,7 @@ public class Java2DSimulator extends Application {
                     PhysObj rectangle = new PhysObj(boxImg);
                     BodyFixture f = new BodyFixture(rectShape);
                     f.setDensity(1.2);
-                    
+
                     f.setFriction(0.8);
                     f.setRestitution(0.4);
                     rectangle.addFixture(f);
@@ -201,10 +200,29 @@ public class Java2DSimulator extends Application {
                         par.translate(particles.get(i).getX(), particles.get(i).getY());
                         world.addBody(par);
                     }
+                } else if (toolbar.type == 4) {
+                    int x = (int) event.getSceneX();
+                    int y = (int) event.getSceneY();
+                    Rectangle floorrect = new Rectangle(1.0, 1.0);
+                    PhysObj floorbox = new PhysObj(new Image("file:img/darkground.png"));
+                    floorbox.addFixture(new BodyFixture(floorrect));
+                    floorbox.setMass(MassType.INFINITE);
+                    if (x > (Settings.SCENE_WIDTH / 2)) {
+                        double rx
+                                = (x - Settings.SCENE_WIDTH / 2) / 64 - 0.5;
+                        double ry
+                                = (Settings.SCENE_HEIGHT - y) / 64 - 0.5;
+                        floorbox.translate(rx, ry);
+                    } else if (x < (Settings.SCENE_WIDTH / 2)) {
+                        double lx = -((Settings.SCENE_WIDTH / 2 - x) / 64) - 0.5;
+                        double ly = (Settings.SCENE_HEIGHT - y) / 64 - 0.5;
+                        floorbox.translate(lx, ly);
+                        
+                    }
+                    world.addBody(floorbox);
                 }
             }
         });
-
 
         AnimationTimer gameLoop = new AnimationTimer() {
 

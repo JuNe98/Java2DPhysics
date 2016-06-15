@@ -14,7 +14,7 @@ import javafx.stage.Stage;
 
 /**
  *
- * @author Selina Enzlmüller
+ * @author Selina Enzlmüller, Matthias Stirmayr
  */
 public class Toolbar extends Application {
 
@@ -38,7 +38,8 @@ public class Toolbar extends Application {
                 "Circle",
                 "Square",
                 "Particle Circle",
-                "Particle Square"
+                "Particle Square",
+                "Fixed Block"
         );
 
         Label sizeparameter = new Label("SizeParameter");
@@ -62,6 +63,8 @@ public class Toolbar extends Application {
                 type = 2;
             } else if (a == "Particle Square") {
                 type = 3;
+            } else if (a == "Fixed Block") {
+                type = 4;
             }
             if (tf.getText().length() != 0) {
 
