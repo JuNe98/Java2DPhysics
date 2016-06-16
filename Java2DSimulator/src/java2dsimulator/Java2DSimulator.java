@@ -104,7 +104,7 @@ public class Java2DSimulator extends Application {
                     MyCircle test = new MyCircle(toolbar.size, event.getSceneX(), event.getSceneY());
                     ArrayList<Particle> x = test.getCircles();
                     for (int i = 0; i < x.size(); i++) {
-                        PhysObj par = new PhysObj(new Image("file:img/particle.png"));
+                        PhysObj par = new PhysObj(new Image("file:img/redParticle.png"));
                         BodyFixture f = new BodyFixture(new Circle(0.125));
                         f.setDensity(1.2);
                         f.setFriction(0.8);
@@ -190,7 +190,7 @@ public class Java2DSimulator extends Application {
                     MySquare square = new MySquare(toolbar.size, x, y);
                     ArrayList<Particle> particles = square.getCircles();
                     for (int i = 0; i < particles.size(); i++) {
-                        PhysObj par = new PhysObj(new Image("file:img/particle.png"));
+                        PhysObj par = new PhysObj(new Image("file:img/blueParticle.png"));
                         BodyFixture f = new BodyFixture(new Circle(0.125));
                         f.setDensity(1.2);
                         f.setFriction(0.8);
