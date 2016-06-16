@@ -49,7 +49,7 @@ public class Java2DSimulator extends Application {
         // at the bottom with height increasing up the screen
         overlay = new BorderPane();
         mainPane = new Pane();
-        overlay.setStyle("-fx-background-color: #F2FF3F;");
+        overlay.setStyle("-fx-background-color: #E6E6FA;");
         Object2D oj;
 
         Scale s = new Scale(1, -1);
