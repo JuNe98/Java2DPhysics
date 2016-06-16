@@ -4,35 +4,63 @@ import java.awt.Point;
 import java.util.ArrayList;
 
 /**
- *
+ * This class generates the square particle coordinates.
+ * 
  * @author Julian Nenning
  */
 public class MySquare implements Object2D{
     private int length;
     private ArrayList<Particle> particles;
     private Point mouseposition = new Point();
-
+    
+    /**
+     * 
+     * @param length Length of the square.
+     */
     public MySquare(int length) {
         this.length = length;
     }
     
+    /**
+     * 
+     * @param x X-coordnate of the pointer.
+     * @param y Y-coordnate of the pointer.
+     */
     public MySquare(int x, int y){
         mouseposition.setLocation(x, y);
     }
     
+    /**
+     * 
+     * @param length Length of the square.
+     * @param x X-coordnate of the pointer.
+     * @param y Y-coordnate of the pointer.
+     */
     public MySquare(int length, int x, int y){
         this.length = length;
         mouseposition.setLocation(x, y);
     }
     
+    /**
+     * 
+     * @return Returns the length of the square.
+     */
     public int getLength() {
         return this.length;
     }
-
+    
+    /**
+     * 
+     * @param length Length of the square.
+     */
     public void setLength(int length) {
         this.length = length;
     }
-
+    
+    /**
+     * 
+     * @return This function returns the coordinates for the particles of a square.
+     */
     @Override
     public ArrayList<Particle> getCircles() {
         particles = new ArrayList<Particle>();
